@@ -5,9 +5,9 @@ LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
 
 //権限の設定
 String authority = null;
-if (loginInfo.getLoginFlag().equals("0")) {
+if (loginInfo.getLoginFlag() == 0) {
 	authority = "会員";
-} else if (loginInfo.getLoginFlag().equals("1")) {
+} else if (loginInfo.getLoginFlag() == 1) {
 	authority = "管理者";
 }
 %>

@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("//onSaleDetail")
-public class onSaleDetailServlet  extends HttpServlet {
+@WebServlet("/onSaleDetail")
+public class OnSaleDetailServlet  extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -20,16 +20,17 @@ public class onSaleDetailServlet  extends HttpServlet {
 		
 	ProductionInfoDAO productDao = new ProductionInfoDAO();
 
-	ProductionInfo production = new ProductionInfo();
+	ProductionInfo product = new ProductionInfo();
 	
 	request.setCharacterEncoding("UTF-8");
 	
 	try {
-		byte[] picture = request.getParameter("picture");
+		//int productid = Integer.parseInt(request.getParameter("product_id"));
+		int num = 1;
+	
+		product = productDao.selectByProductid(num);
 		
-		//ここにDAOを使って商品情報を持ってくる
-		
-		request.setAttribute("picture", picture);
+		request.setAttribute("productid", product);
 		
 	}catch(IllegalStateException e) {
 		error="DB接続エラーの為、一覧表示は行えませんでした。 ";
@@ -37,7 +38,7 @@ public class onSaleDetailServlet  extends HttpServlet {
 		request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 	}
 	
-	
+	request.getRequestDispatcher("/view/onSaleDetail.jsp").forward(request, response);
 
 	}
 

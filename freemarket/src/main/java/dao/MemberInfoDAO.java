@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -79,7 +78,7 @@ public class MemberInfoDAO {
 				memberInfo.setBirth_date(rs.getString("birth_date"));
 				memberInfo.setWithdrawal(rs.getInt("withdrawal"));
 				memberInfo.setUpdate_date(rs.getString("update_date"));
-				memberInfo.setPhotograph(rs.getBlob("photograph").getBytes(1, (int) rs.getBlob("photograph").length()));
+				memberInfo.setPhotograph(rs.getString("photograph"));
 				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 				memberInfo.setNickname(rs.getString("nickname"));
 			}
@@ -151,12 +150,11 @@ public class MemberInfoDAO {
 					memberInfo.setBirth_date(rs.getString("birth_date"));
 					memberInfo.setWithdrawal(rs.getInt("withdrawal"));
 					memberInfo.setUpdate_date(rs.getString("update_date"));
+					memberInfo.setPhotograph(rs.getString("photograph"));
 					memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 					memberInfo.setNickname(rs.getString("nickname"));
-
-					//写真の保存
-					Blob photograph = rs.getBlob("photograph");
-					memberInfo.setPhotograph(photograph.getBytes(1, (int) photograph.length()));
+					
+					memberInfoList.add(memberInfo);
 				}
 
 			}
@@ -225,12 +223,11 @@ public class MemberInfoDAO {
 				memberInfo.setBirth_date(rs.getString("birth_date"));
 				memberInfo.setWithdrawal(rs.getInt("withdrawal"));
 				memberInfo.setUpdate_date(rs.getString("update_date"));
+				memberInfo.setPhotograph(rs.getString("photograph"));
 				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 				memberInfo.setNickname(rs.getString("nickname"));
-
-				//写真の保存
-				Blob photograph = rs.getBlob("photograph");
-				memberInfo.setPhotograph(photograph.getBytes(1, (int) photograph.length()));
+				
+				memberInfoList.add(memberInfo);
 			}
 
 		} catch (Exception e) {
@@ -250,5 +247,169 @@ public class MemberInfoDAO {
 			}
 		}
 		return memberInfoList;
+	}
+	
+	/**
+	 * DBに会員情報を登録するメソッド
+	 *
+	 * @param 会員情報
+	 * @throws IllegalStateException メソッド内部で例外が発生した場合
+	 */
+	public void insert(MemberInfo memberInfo) {
+
+		//オブジェクト生成
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+			//SQL文
+			String sql = "INSERT INTO memberinfo VALUES(" + 
+			memberInfo.getMember_id() + "," + 
+			memberInfo.getUser_id() + ",'" +
+			memberInfo.getSurname() + "','" +
+			memberInfo.getKana_surname() + "','" +
+			memberInfo.getName() + "','" +
+			memberInfo.getKana_name() + "','" +
+			memberInfo.getAge() + "','" +
+			memberInfo.getTel() + "','" +
+			memberInfo.getPrefectures() + "','" +
+			memberInfo.getKana_prefectures() + "','" +
+			memberInfo.getMunicipality() + "','" +
+			memberInfo.getKana_municipality() + "','" +
+			memberInfo.getStreet_address() + "','" +
+			memberInfo.getBuilding_name() + "','" +
+			memberInfo.getBirth_date() + "'," +
+			0 + "," +
+			"CURDATE()" + ",'" +
+			memberInfo.getPhotograph() + "','" +
+			memberInfo.getExhibition_area() + "','" +
+			memberInfo.getNickname() + "')";
+			
+			
+			//DBに接続
+			con = getConnection();
+			//SQL送信準備
+			smt = con.createStatement();
+			//SQL実行
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			//リソース開放
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
+	/**
+	 * DBに会員情報を削除するメソッド
+	 *
+	 * @param ユーザーID
+	 * @throws IllegalStateException メソッド内部で例外が発生した場合
+	 */
+	public void delete(int userid) {
+
+		//オブジェクト生成
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+			//SQL文
+			String sql = "DELETE FROM memberinfo WHERE user_id = " + userid;
+			//DBに接続
+			con = getConnection();
+			//SQL送信準備
+			smt = con.createStatement();
+			//SQL実行
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			//リソース開放
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
+	/**
+	 * DBに会員情報を変更するメソッド
+	 *
+	 * @param 会員情報
+	 * @throws IllegalStateException メソッド内部で例外が発生した場合
+	 */
+	public void update(MemberInfo memberInfo) {
+
+		//オブジェクト生成
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+			//SQL文
+			String sql = "UPDATE memberinfo " + 
+			"SET member_id=" + memberInfo.getMember_id() + 
+			",user_id=" + memberInfo.getUser_id() +
+			",surname='" + memberInfo.getSurname() +
+			"',kana_surname='" + memberInfo.getKana_surname() +
+			"',age='" + memberInfo.getAge() +
+			"',tel='" + memberInfo.getTel() +
+			"',prefectures='" + memberInfo.getPrefectures() +
+			"',kana_prefectures='" + memberInfo.getKana_prefectures() +
+			"',municipality='" + memberInfo.getMunicipality() +
+			"',kana_municipality='" + memberInfo.getKana_municipality() +
+			"',street_address='" + memberInfo.getStreet_address() +
+			"',building_name='" + memberInfo.getBuilding_name() +
+			"',birth_date='" + memberInfo.getBirth_date() +
+			"',withdrawal=" + memberInfo.getWithdrawal() +
+			"',update_date=" + "NOW()" +
+			"',photograph='" + memberInfo.getPhotograph() +
+			"',exhibition_area='" + memberInfo.getExhibition_area() +
+			"',nickname='" + memberInfo.getNickname() +
+			" WHERE user_id='" + memberInfo.getUser_id() + "'";
+			//DBに接続
+			con = getConnection();
+			//SQL送信準備
+			smt = con.createStatement();
+			//SQL実行
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			//リソース開放
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
 	}
 }

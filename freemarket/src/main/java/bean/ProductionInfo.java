@@ -18,7 +18,7 @@ public class ProductionInfo {
 
 	private String color;
 
-	private byte[] picture;
+	private String picture;
 
 	private String product;
 
@@ -152,11 +152,11 @@ public class ProductionInfo {
 		this.color = color;
 	}
 
-	public byte[] getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicture(byte[] picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 

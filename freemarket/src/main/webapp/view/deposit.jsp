@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList,bean.ProductionInfo"%>
 
 <head>
 <title>入金情報</title>
@@ -27,6 +28,17 @@
 		</h1>
 		<h2>合計:金額</h2>
 	</div>
+	
+			<%
+			//DepositServletでリクエストスコープに登録した商品情報を取得します。
+			ArrayList<ProductionInfo> list =(ArrayList<ProductionInfo>)request.getAttribute("product_list");
+			//取得した商品情報をループ処理を利用し画面に表示します。
+			if(list != null){
+				for(int i=0;i<list.size();i++){
+					ProductionInfo product = list.get(i);
+				}
+			%>
+	
 	<div>
 		<table style="width: 100%;">
 			<tr>
@@ -37,33 +49,8 @@
 			</tr>
 			<tr>
 				<td><img src="./img/image1.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</p></td>
-			</tr>
-			<tr>
-				<td><img src="./img/image2.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</p></td>
-			</tr>
-			<tr>
-				<td><img src="./img/image3.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</h2></td>
-			</tr>
-			<tr>
-				<td><img src="./img/image4.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</h2></td>
-			</tr>
-			<tr>
-				<td><img src="./img/image5.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</h2></td>
-			</tr>
-			<tr>
-				<td><img src="./img/image6.jpeg" width="200" height="200" alt="" /></td>
-				<td><p>商品名</p></td>
-				<td><p>価格</h2></td>
+				<td><p>商品名：<%=product.getProduct()%></p></td>
+				<td><p>価格：<%=product.getSelling_price()%></p></td>
 			</tr>
 		</table>
 	</div>

@@ -36,7 +36,7 @@ public class MemberInfo {
 	
 	private String update_date;
 	
-	private byte[] photograph;
+	private String photograph;
 	
 	private String exhibition_area;
 	
@@ -201,11 +201,11 @@ public class MemberInfo {
 		this.update_date = update_date;
 	}
 
-	public byte[] getPhotograph() {
+	public String getPhotograph() {
 		return photograph;
 	}
 
-	public void setPhotograph(byte[] photograph) {
+	public void setPhotograph(String photograph) {
 		this.photograph = photograph;
 	}
 
