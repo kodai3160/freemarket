@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import bean.ProductionInfo;
@@ -579,13 +581,13 @@ public class ProductionInfoDAO {
 					productionInfo.getSelling_price() + "','" +
 					productionInfo.getSize() + "','" +
 					productionInfo.getShipping_addres() + "','" +
-					"CURRENT_TIMESTAMP()" + "','" +
+					productionInfo.getUpdate_time() + "','" +
 					productionInfo.getUntil_shipping() + "','" +
 					productionInfo.getOrigin_region() + "','" +
 					productionInfo.getShipping_method() + "','" +
-					"CURRENT_TIMESTAMP()" + "','" +
-					"CURRENT_TIMESTAMP()" + "','" +
-					"CURRENT_TIMESTAMP()" + "','" +
+					productionInfo.getRegistration_date() + "','" +
+					productionInfo.getUpdate_date() + "','" +
+					productionInfo.getDetails_update_date() + "','" +
 					"" + "','" +
 					"0" + "','" +
 					"" + "','" +
@@ -631,36 +633,42 @@ public class ProductionInfoDAO {
 		Statement smt = null;
 
 		try {
+	        // 表示形式を指定
+	        DateTimeFormatter dtf1 =
+	            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // ①
+	        String formatNowDate = dtf1.format(LocalDateTime.now()); // ②
+			
+			
 			//SQL文
 			String sql = "UPDATE productioninfo " + 
-			"SET product_id=" + productionInfo.getProduct_id() + 
-			",member_id=" + productionInfo.getMember_id() +
-			",buyer_id=" + productionInfo.getBuyer_id() +
-			"'category='" + productionInfo.getCategory() +
-			"',item_description='" + productionInfo.getItem_description() +
-			"',item_condition='" + productionInfo.getItem_condition() +
-			"',uses_number='" + productionInfo.getUses_number() +
-			"',color='" + productionInfo.getColor() +
-			"',picture='" + productionInfo.getPicture() +
-			"',product='" + productionInfo.getProduct() +
-			"',cost_price='" + productionInfo.getCost_price() +
-			"',selling_price='" + productionInfo.getSelling_price() +
-			"',size='" + productionInfo.getSize() +
-			"',shipping_addres=" + productionInfo.getShipping_addres() +
-			"',update_time=" + "NOW()" +
-			"',until_shipping='" + productionInfo.getUntil_shipping() +
-			"',origin_region='" + productionInfo.getOrigin_region() +
-			"',shipping_method='" + productionInfo.getShipping_method() +
-			"',registration_date='" + productionInfo.getRegistration_date() +
-			"',update_date='" + "NOW()" +
-			"',details_update_date='" + "NOW()" +
-			"',shipping_status_flag='" + productionInfo.getShipping_status_flag() +
-			"',transaction_flag='" + 0 +
-			"',transaction_completion_date='" + "NULL" +
-			"',deposit_status='" + 0 +
-			"',deposit_update_date='" + "NULL" +
-			"',display_flag='" + productionInfo.getDisplay_flag() +
-			" WHERE product_id=" + productionInfo.getProduct_id();
+			"SET product_id= " + productionInfo.getProduct_id() + 
+			",member_id= " + productionInfo.getMember_id() +
+			",buyer_id= " + productionInfo.getBuyer_id() +
+			",category= '" + productionInfo.getCategory() +
+			"',item_description= '" + productionInfo.getItem_description() +
+			"',item_condition= '" + productionInfo.getItem_condition() +
+			"',uses_number= '" + productionInfo.getUses_number() +
+			"',color= '" + productionInfo.getColor() +
+			"',picture= '" + productionInfo.getPicture() +
+			"',product= '" + productionInfo.getProduct() +
+			"',cost_price= '" + productionInfo.getCost_price() +
+			"',selling_price= '" + productionInfo.getSelling_price() +
+			"',size= '" + productionInfo.getSize() +
+			"',shipping_addres= '" + productionInfo.getShipping_addres() +
+			"',update_time= '" + formatNowDate +
+			",until_shipping= " + productionInfo.getUntil_shipping() +
+			",origin_region= " + productionInfo.getOrigin_region() +
+			",shipping_method= " + productionInfo.getShipping_method() +
+			",registration_date= " + productionInfo.getRegistration_date() +
+			",update_date= " + formatNowDate +
+			",details_update_date= " + formatNowDate +
+			",shipping_status_flag= " + productionInfo.getShipping_status_flag() +
+			",transaction_flag= " + 0 +
+			",transaction_completion_date= " + formatNowDate +
+			",deposit_status= " + 0 +
+			",deposit_update_date= " + formatNowDate +
+			",display_flag= " + productionInfo.getDisplay_flag() +
+			"' WHERE product_id=" + productionInfo.getProduct_id();
 			
 			
 			//DBに接続

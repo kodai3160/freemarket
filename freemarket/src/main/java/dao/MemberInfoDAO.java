@@ -41,7 +41,7 @@ public class MemberInfoDAO {
 	 * @return ユーザーIDで絞った会員情報
 	 * 
 	 */
-	public MemberInfo selectByUser(String userid) {
+	public MemberInfo selectByUser(int userid) {
 		//オブジェクト生成
 		MemberInfo memberInfo = new MemberInfo();
 
@@ -51,7 +51,75 @@ public class MemberInfoDAO {
 
 		//SQL作成
 		String sql = "SELECT * FROM memberinfo WHERE "
-				+ "user_id ='" + userid;
+				+ "user_id =" + userid;
+
+		try {
+			con = getConnection();
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			while (rs.next()) {
+				//情報を格納
+				memberInfo.setMember_id(rs.getInt("member_id"));
+				memberInfo.setUser_id(rs.getInt("user_id"));
+				memberInfo.setSurname(rs.getString("surname"));
+				memberInfo.setKana_surname(rs.getString("kana_surname"));
+				memberInfo.setName(rs.getString("name"));
+				memberInfo.setKana_name(rs.getString("kana_name"));
+				memberInfo.setAge(rs.getString("age"));
+				memberInfo.setTel(rs.getString("tel"));
+				memberInfo.setPrefectures(rs.getString("prefectures"));
+				memberInfo.setKana_prefectures(rs.getString("kana_prefectures"));
+				memberInfo.setMunicipality(rs.getString("municipality"));
+				memberInfo.setKana_municipality(rs.getString("kana_municipality"));
+				memberInfo.setStreet_address(rs.getString("street_address"));
+				memberInfo.setBuilding_name(rs.getString("building_name"));
+				memberInfo.setBirth_date(rs.getString("birth_date"));
+				memberInfo.setWithdrawal(rs.getInt("withdrawal"));
+				memberInfo.setUpdate_date(rs.getString("update_date"));
+				memberInfo.setPhotograph(rs.getString("photograph"));
+				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
+				memberInfo.setNickname(rs.getString("nickname"));
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return memberInfo;
+	}
+	
+	/**
+	 * ユーザーIDで絞った会員情報を取得するメソッド
+	 * 
+	 * @param userid
+	 * @return ユーザーIDで絞った会員情報
+	 * 
+	 */
+	public MemberInfo selectByMemberId(int memberid) {
+		//オブジェクト生成
+		MemberInfo memberInfo = new MemberInfo();
+
+		//DB接続
+		Connection con = null;
+		Statement smt = null;
+
+		//SQL作成
+		String sql = "SELECT * FROM memberinfo WHERE "
+				+ "member_id =" + memberid;
 
 		try {
 			con = getConnection();
@@ -283,6 +351,10 @@ public class MemberInfoDAO {
 			"CURDATE()" + ",'" +
 			memberInfo.getPhotograph() + "','" +
 			memberInfo.getExhibition_area() + "','" +
+			memberInfo.getZipcode() + "','" +
+			memberInfo.getKana_building_name() + "','" +
+			memberInfo.getChou_name() + "','" +
+			memberInfo.getKana_chou_name() + "','" +
 			memberInfo.getNickname() + "')";
 			
 			

@@ -13,10 +13,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/onSaleDetail")
 public class OnSaleDetailServlet  extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String error = "";
+		String cmd = "";
 		
 	ProductionInfoDAO productDao = new ProductionInfoDAO();
 
@@ -25,10 +26,11 @@ public class OnSaleDetailServlet  extends HttpServlet {
 	request.setCharacterEncoding("UTF-8");
 	
 	try {
-		//int productid = Integer.parseInt(request.getParameter("product_id"));
-		int num = 1;
+		int productid = Integer.parseInt(request.getParameter("product_id"));
+
+		cmd = request.getParameter("cmd");
 	
-		product = productDao.selectByProductid(num);
+		product = productDao.selectByProductid(productid);
 		
 		request.setAttribute("productid", product);
 		

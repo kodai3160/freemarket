@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -128,6 +130,14 @@ public class ProductInsertServlet extends HttpServlet {
 			//登録する商品情報を格納するProductionInfoオブジェクトを生成
 			ProductionInfo productionInfo = new ProductionInfo();
 			
+			 // 現在日時を取得
+	        LocalDateTime nowDate = LocalDateTime.now();
+
+	        // 表示形式を指定
+	        DateTimeFormatter dtf1 =
+	            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // ①
+	        String formatNowDate = dtf1.format(nowDate); // ②
+			
 			//自動で設定される
 			productionInfo.setProduct_id(0);
 			//ログインしている会員ID
@@ -154,20 +164,20 @@ public class ProductInsertServlet extends HttpServlet {
 			productionInfo.setSize(size);
 			//配送先　商品登録のため設定できない
 			productionInfo.setShipping_addres("");
-			//更新日 DAO側で設定される
-			productionInfo.setUpdate_time("");
+			//更新日
+			productionInfo.setUpdate_time(formatNowDate);
 			//発送までの日数
 			productionInfo.setUntil_shipping(delivery_days);
 			//発送地域
 			productionInfo.setOrigin_region(region);
 			//発送方法
 			productionInfo.setShipping_method(delivery);
-			//商品登録日　DAO側で設定される
-			productionInfo.setRegistration_date("");
-			//商品更新日 DAO側で設定される
-			productionInfo.setUpdate_date("");
-			//商品詳細更新日 DAO側で設定される
-			productionInfo.setDetails_update_date("");
+			//商品登録日
+			productionInfo.setRegistration_date(formatNowDate);
+			//商品更新日
+			productionInfo.setUpdate_date(formatNowDate);
+			//商品詳細更新日
+			productionInfo.setDetails_update_date(formatNowDate);
 			//発送状況フラグ DAO側で設定される
 			productionInfo.setShipping_status_flag("");
 			//取引フラグ DAO側で設定される
@@ -182,8 +192,6 @@ public class ProductInsertServlet extends HttpServlet {
 			productionInfo.setDisplay_flag("");
 			//写真
 			productionInfo.setPicture(filePath);
-			
-			更新日時をjava側で取得して設定する
 			
 			//DBに格納
 			productionDao.insert(productionInfo);

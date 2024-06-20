@@ -18,17 +18,14 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 		<div class="menu">
 			<nav class="stroke">
 				<ul>
-					<li><a href="./product_list.html">商品一覧</a></li>
-					<li><a href="./user_info.html">ユーザー情報</a></li>
-					<li><a href="./product_insert.html">商品登録</a></li>
+					<li><a href="<%=request.getContextPath() %>/productList">商品一覧</a></li>
+					<li><a href="<%=request.getContextPath() %>/userInformation">ユーザー情報</a></li>
+					<li><a href="<%=request.getContextPath() %>/view/productInsert.jsp">商品登録</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 
-				<%
-
-				%>
 
 	<div class="detail">
 		<div id="detail_picture">
@@ -42,6 +39,16 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 			<h2>使用回数：<%=production.getUses_number()%></h2>
 			<h2>色：<%=production.getColor()%></h2>
 			<h2>サイズ：<%=production.getSize()%></h2>
+			<h2>発送状況 0:未発送 1:発送済み</h2>
+			<h2><%=production.getShipping_status_flag()%></h2>
+			<h2>発送状況変更
+			<td style="text-align:left; width:125px">
+				<a href="<%=request.getContextPath()%>/shippingChange?product_id=<%=production.getProduct_id() %>&shipping_status_flag=1">発送済み</a>
+			</td>
+			<td style="text-align:left; width:125px">
+				<a href="<%=request.getContextPath()%>/shippingChange?product_id=<%=production.getProduct_id() %>&shipping_status_flag=0">未発送</a>
+			</td>
+			</h2>
 			<button type="submit" onclick="location.href='./product_buy.html'">購入</button>
 		</div>
 	</div>

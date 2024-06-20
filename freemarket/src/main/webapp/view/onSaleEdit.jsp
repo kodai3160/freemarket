@@ -40,11 +40,14 @@
 				<td>
 					<p>画像</p>
 				</td>
-				<td><input type="submit" name="picture" value="画像選択"></td>
+				<form method="post" enctype="multipart/form-data">
+				<td><input type="file" name="picture"></td>
+				</form>
 			</tr>
 		</table>
-		<input type="submit" value = "変更">
+		<button type="submit" onclick="<%=request.getContextPath()%>/onSaleEdit">変更</button>
 		</form>
 		</div>
+		<%@ include file = "/common/footer.jsp" %>
 	</body>
 </html>

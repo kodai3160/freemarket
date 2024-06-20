@@ -30,6 +30,8 @@ public class MemberInfo {
 	
 	private String building_name;
 	
+	private String kana_building_name;
+	
 	private String birth_date;
 	
 	private int withdrawal;
@@ -41,6 +43,14 @@ public class MemberInfo {
 	private String exhibition_area;
 	
 	private String nickname;
+	
+	private int zipcode;
+	
+	private String  chou_name;
+	
+	private String kana_chou_name;
+	
+	
 
 	public MemberInfo() {
 		this.member_id = 0;
@@ -57,12 +67,16 @@ public class MemberInfo {
 		this.kana_municipality = null;
 		this.street_address = null;
 		this.building_name = null;
+		this.kana_building_name = null;
 		this.birth_date = null;
 		this.withdrawal = 0;
 		this.update_date = null;
 		this.photograph = null;
 		this.exhibition_area = null;
 		this.nickname = null;
+		this.zipcode = 0;
+		this.chou_name = null;
+		this.kana_chou_name  = null;
 	}
 
 	public int getMember_id() {
@@ -176,6 +190,14 @@ public class MemberInfo {
 	public void setBuilding_name(String building_name) {
 		this.building_name = building_name;
 	}
+	
+	public String getKana_building_name() {
+		return kana_building_name;
+	}
+	
+	public void setKana_building_name(String kana_building_name) {
+		this.kana_building_name = kana_building_name;
+	}
 
 	public String getBirth_date() {
 		return birth_date;
@@ -219,10 +241,31 @@ public class MemberInfo {
 
 	public String getNickname() {
 		return nickname;
-	}
-
+	};
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 	
+	public int getZipcode() {
+		return zipcode;
+	}
+	
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+	
+	public String getChou_name() {
+		return chou_name;
+	}
+	public void setChou_name(String chou_name) {
+		this.chou_name = chou_name;
+	}
+	
+	public String getKana_chou_name() {
+		return kana_chou_name;
+	}
+	
+	public void setKana_chou_name(String kana_chou_name) {
+		this.kana_chou_name = kana_chou_name;
+	}
 }

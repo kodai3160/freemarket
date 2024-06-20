@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import bean.ProductionInfo;
 import dao.ProductionInfoDAO;
@@ -17,19 +18,21 @@ public class SalesServlet extends HttpServlet {
 		
 		String error = "";
 		
+		try {
+		
+		//ProductionInfoDAOをインスタンス化する
 		ProductionInfoDAO productDao = new ProductionInfoDAO();
 		
-		ProductionInfo productionInfo = new ProductionInfo();
+		// 関連メソッドを呼び出し、戻り値としてProductionInfoオブジェクトのリストを取得する
+		ArrayList<ProductionInfo> productList = productDao.selectByDepositStatus();
 
-		request.setCharacterEncoding("UTF-8");
-		
-		try {
+		request.setAttribute("product_List", productList);
 			
 		}catch(IllegalStateException e) {
 			error="DB接続エラーの為、一覧表示は行えませんでした。 ";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/view/detail.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/sales.jsp").forward(request, response);
 	}
 }

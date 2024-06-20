@@ -1,37 +1,21 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <%
-String message = (String) request.getAttribute("message");
-String cmd = (String) request.getAttribute("cmd");
+String error = (String) request.getAttribute("error");
 %>
-
-<html>
 <head>
-<title>Error</title>
+	<title>エラー</title>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 </head>
-<body>
-	<%@include file="/common/header.jsp"%>
-	<div style="text-align: center">
-		<p>●●エラー●●</p>
-		<p style="color:red"><%=message%></p>
-		<%
-		if (cmd.equals("menu")) {
-		%>
-		<p><a href="<%=request.getContextPath()%>/view/menu.jsp">[メニューに戻る]</a></p>
-		<%
-		} else if (cmd.equals("logout")) {
-		%>
-		<p><a href="<%=request.getContextPath()%>/logout">[ログイン画面に戻る]</a></p>
-		<%
-		} else {
-		%>
-		<p><a href="<%=request.getContextPath()%>/list">[一覧表示に戻る]</a></p>
-		<%
-		}
-		%>
+
+<body class="login">
+<%@include file="/common/header.jsp"%>
+	<div class="withdrawal">
+		<h1 style="color:red">エラー</h1>
+		<h3><%=error %></h3>
+		<button type="submit" onclick="location.href='<%=request.getContextPath()%>/view/login.jsp'">ログインに戻る</button>
 	</div>
-	<div style="margin-top: 460;">
-		<%@include file="/common/footer.jsp"%>
-	</div>
+	<%@include file="/common/footer.jsp"%>
 </body>
+
 </html>

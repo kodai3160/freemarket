@@ -35,6 +35,63 @@ public class MailInfoDAO {
 	}
 	
 	/**
+	 * ユーザーIDをもとにして、送信者IDとメッセージ情報のリストを取得するメソッド
+	 * 
+	 * @return 送信者IDをもとにしたメッセージ情報のリスト
+	 */
+	public ArrayList<MailInfo> selectByMemberIds(int loginMemberid, int memberid) {
+		//リスト
+		ArrayList<MailInfo> mailInfoList = new ArrayList<MailInfo>();
+
+		//DB接続
+		Connection con = null;
+		Statement smt = null;
+
+		//SQL作成
+		String sql = "SELECT * FROM mailinfo "
+				+ "WHERE (sender_id = " + loginMemberid + " AND receiver_id = " + memberid + ") OR"
+				+ "(sender_id = " + memberid + "AND receiver_id = " + loginMemberid + ")"
+				+ "ORDER BY sent_date DESC";
+
+	 	try {
+			con = getConnection();
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			while (rs.next()) {
+				//オブジェクト生成
+				MailInfo mailInfo = new MailInfo();
+
+				//情報を格納
+				mailInfo.setMail_id(rs.getInt("mail_id"));
+				mailInfo.setSender_id(rs.getInt("sender_id"));
+				mailInfo.setReceiver_id(rs.getInt("receiver_id"));
+				mailInfo.setMessage(rs.getString("message"));
+				mailInfo.setSent_date(rs.getString("sent_date"));
+				mailInfoList.add(mailInfo);
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return mailInfoList;
+	}
+	
+	/**
 	 * 送信者IDをもとにしたメッセージ情報のリストを取得するメソッド
 	 * 
 	 * @return 送信者IDをもとにしたメッセージ情報のリスト

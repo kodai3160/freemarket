@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/deposit")
 public class DepositServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String error = "";
@@ -24,10 +24,11 @@ public class DepositServlet extends HttpServlet {
 			
 			ProductionInfoDAO productDao = new ProductionInfoDAO(); 
 			
-			ArrayList<ProductionInfo> productList = productDao.selectByDepositAndMemberid(2);
+			ArrayList<ProductionInfo> productList = productDao.selectAll();
 			
 			request.setAttribute("product_list", productList);
-
+			
+				
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、一覧表示は行えませんでした。 ";
 			request.setAttribute("error", error);

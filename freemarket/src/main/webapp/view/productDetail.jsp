@@ -13,7 +13,7 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 
 <body class="login">
 	<%@include file="/common/header.jsp"%>
-	<%@include file="/common/userinfo.jsp"%>
+	
 	<div class="detail">
 		<div id="detail_picture">
 			<img src="./img/image1.jpeg" width="400" height="400" alt="" />

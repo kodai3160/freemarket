@@ -19,12 +19,13 @@ public class ProductDetailServlet extends HttpServlet {
 		String error = null;
 		//DAOのオブジェクトを生成
 		ProductionInfoDAO productInfoDao = new ProductionInfoDAO();
-		//画面からの情報を受け取る
-		int productID = Integer.parseInt(request.getParameter("product_id"));
 		//エンコーディング
 		request.setCharacterEncoding("UTF-8");
 		//オブジェクトに格納
 		try {
+			//画面からの情報を受け取る
+			int productID = Integer.parseInt(request.getParameter("product_id"));
+			
 			 ProductionInfo productInfo = productInfoDao.selectByProductid(productID);
 			 if(productInfo.getProduct_id()==0){
 				 error = "該当する商品がありませんでした。";
