@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/userDetail")
 public class UserDetailServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		//エラー変数の宣言
@@ -39,9 +39,7 @@ public class UserDetailServlet extends HttpServlet {
 			cmd = request.getParameter("cmd");
 
 			//MemberInfoDAOクラスに定義したselectByUser（）メソッドを利用してユーザー情報を取得
-			MemberInfo memberData = memberDao.selectByUser(user_id);
-
-			
+			MemberInfo memberData = memberDao.selectByUser(Integer.parseInt(user_id));
 
 			//取得したユーザー情報を「memberInfo」という名前でリクエストスコープに登録	 
 			request.setAttribute("memberInfo", memberData);

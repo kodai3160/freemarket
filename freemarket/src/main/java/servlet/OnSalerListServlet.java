@@ -5,14 +5,16 @@ import java.util.ArrayList;
 
 import bean.MemberInfo;
 import dao.MemberInfoDAO;
+import dao.ProductionInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/userList")
-public class UserListServlet extends HttpServlet {
+@WebServlet("/onSalerList")
+public class OnSalerListServlet extends HttpServlet {
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String error = null;
@@ -23,8 +25,11 @@ public class UserListServlet extends HttpServlet {
 			//memberInfoDAOをインスタンス化
 			MemberInfoDAO objDao = new MemberInfoDAO();
 			
+			//productionInfoDAOをインスタンス化
+			ProductionInfoDAO productionInfoDAO = new ProductionInfoDAO();
+			
 			//関連メソッドを呼び出し戻り値としてMemberInfoオブジェクトのリストを取得する
-			ArrayList<MemberInfo> memberList = objDao.selectAll();
+			ArrayList<MemberInfo> memberList = objDao.selectByUserList(productionInfoDAO.selectMemberidList());
 			
 			//リクエストスコープへ登録
 			request.setAttribute("memberList", memberList);
@@ -36,7 +41,7 @@ public class UserListServlet extends HttpServlet {
 			//エラーの有無でフォワード先を呼び分ける
 			if(error == null) {
 				//エラーがないとき
-				request.getRequestDispatcher("/view/userList.jsp").forward(request, response);
+				request.getRequestDispatcher("/view/onSalerList.jsp").forward(request, response);
 				
 			}else {
 				request.setAttribute("error", error);

@@ -60,7 +60,6 @@ public class LoginServlet extends HttpServlet {
 					forwardpath = "/productList";
 				} else if (loginInfo.getLoginFlag() == 1) {
 					forwardpath = "/view/menu.jsp";
-					return;
 				}
 			}
 			request.getRequestDispatcher(forwardpath).forward(request, response);

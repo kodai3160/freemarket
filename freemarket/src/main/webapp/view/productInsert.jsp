@@ -11,21 +11,7 @@
 </head>
 
 <body class="login">
-	<header>
-		<div id="title">
-			<h2>フリーマーケット</h2>
-		</div>
-		<div class="menu">
-			<nav class="stroke">
-				<ul>
-					<li><a href="<%=request.getContextPath()%>/productList">商品一覧</a></li>
-					<li><a href="<%=request.getContextPath()%>/userInformation">ユーザー情報</a></li>
-					<li><a href="<%=request.getContextPath()%>/view/productInsert.jsp">商品登録</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-
+	<%@ include file="/common/header.jsp"%>
 	<div class="insert">
 	<form action="<%=request.getContextPath()%>/productInsert" method="POST" enctype="multipart/form-data">
 		<table class="insert_table">
@@ -103,6 +89,7 @@
 			</tr>
 		</table>
 		<button type="submit">登録</button>
+		<input type="hidden" name="check" value="insert">
 	</form>
 	</div>
 

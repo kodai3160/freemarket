@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/productDetail")
 public class ProductDetailServlet extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//エラーメッセージ
 		String error = null;

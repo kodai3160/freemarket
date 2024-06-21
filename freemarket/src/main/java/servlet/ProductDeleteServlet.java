@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ProductDeleteServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String error = "";
 		String cmd = "";

@@ -27,7 +27,7 @@ import util.SendMail;
 @WebServlet("/purchaseConfirmation")
 public class PurchaseConfirmationServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		//エラーメッセージ

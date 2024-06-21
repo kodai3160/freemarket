@@ -81,6 +81,10 @@ public class MemberInfoDAO {
 				memberInfo.setPhotograph(rs.getString("photograph"));
 				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 				memberInfo.setNickname(rs.getString("nickname"));
+				memberInfo.setZipcode(rs.getInt("zipcode"));
+				memberInfo.setKana_building_name(rs.getString("kana_building_name"));
+				memberInfo.setChou_name(rs.getString("chou_name"));
+				memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
 			}
 
 		} catch (Exception e) {
@@ -149,6 +153,10 @@ public class MemberInfoDAO {
 				memberInfo.setPhotograph(rs.getString("photograph"));
 				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 				memberInfo.setNickname(rs.getString("nickname"));
+				memberInfo.setZipcode(rs.getInt("zipcode"));
+				memberInfo.setKana_building_name(rs.getString("kana_building_name"));
+				memberInfo.setChou_name(rs.getString("chou_name"));
+				memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
 			}
 
 		} catch (Exception e) {
@@ -177,7 +185,7 @@ public class MemberInfoDAO {
 	 * @param useridList（商品情報を登録している全てのユーザーID）
 	 * @return 出品している全てのユーザーの会員情報
 	 */
-	public ArrayList<MemberInfo> selectByUserList(ArrayList<String> useridList) {
+	public ArrayList<MemberInfo> selectByUserList(ArrayList<Integer> useridList) {
 		//リスト
 		ArrayList<MemberInfo> memberInfoList = new ArrayList<MemberInfo>();
 
@@ -189,10 +197,10 @@ public class MemberInfoDAO {
 			con = getConnection();
 			smt = con.createStatement();
 
-			for (String userid : useridList) {
+			for (int userid : useridList) {
 				//SQL作成
 				String sql = "SELECT * FROM memberinfo WHERE "
-						+ "user_id ='" + userid;
+						+ "user_id =" + userid;
 
 				ResultSet rs = smt.executeQuery(sql);
 
@@ -221,6 +229,10 @@ public class MemberInfoDAO {
 					memberInfo.setPhotograph(rs.getString("photograph"));
 					memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 					memberInfo.setNickname(rs.getString("nickname"));
+					memberInfo.setZipcode(rs.getInt("zipcode"));
+					memberInfo.setKana_building_name(rs.getString("kana_building_name"));
+					memberInfo.setChou_name(rs.getString("chou_name"));
+					memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
 					
 					memberInfoList.add(memberInfo);
 				}
@@ -294,6 +306,10 @@ public class MemberInfoDAO {
 				memberInfo.setPhotograph(rs.getString("photograph"));
 				memberInfo.setExhibition_area(rs.getString("exhibition_area"));
 				memberInfo.setNickname(rs.getString("nickname"));
+				memberInfo.setZipcode(rs.getInt("zipcode"));
+				memberInfo.setKana_building_name(rs.getString("kana_building_name"));
+				memberInfo.setChou_name(rs.getString("chou_name"));
+				memberInfo.setKana_chou_name(rs.getString("kana_chou_name"));
 				
 				memberInfoList.add(memberInfo);
 			}
@@ -332,7 +348,7 @@ public class MemberInfoDAO {
 		try {
 			//SQL文
 			String sql = "INSERT INTO memberinfo VALUES(" + 
-			memberInfo.getMember_id() + "," + 
+			"NULL" + "," + 
 			memberInfo.getUser_id() + ",'" +
 			memberInfo.getSurname() + "','" +
 			memberInfo.getKana_surname() + "','" +
@@ -347,15 +363,16 @@ public class MemberInfoDAO {
 			memberInfo.getStreet_address() + "','" +
 			memberInfo.getBuilding_name() + "','" +
 			memberInfo.getBirth_date() + "'," +
-			0 + "," +
-			"CURDATE()" + ",'" +
+			0 + ",'" +
+			memberInfo.getUpdate_date() + "','" +
 			memberInfo.getPhotograph() + "','" +
 			memberInfo.getExhibition_area() + "','" +
+			memberInfo.getNickname() + "','" +
 			memberInfo.getZipcode() + "','" +
 			memberInfo.getKana_building_name() + "','" +
 			memberInfo.getChou_name() + "','" +
-			memberInfo.getKana_chou_name() + "','" +
-			memberInfo.getNickname() + "')";
+			memberInfo.getKana_chou_name() + "')";
+			
 			
 			
 			//DBに接続
@@ -458,6 +475,10 @@ public class MemberInfoDAO {
 			"',photograph='" + memberInfo.getPhotograph() +
 			"',exhibition_area='" + memberInfo.getExhibition_area() +
 			"',nickname='" + memberInfo.getNickname() +
+			"',zipcode='" + memberInfo.getZipcode() +
+			"',kana_building_name='" + memberInfo.getKana_building_name() +
+			"',chou_name='" + memberInfo.getChou_name() +
+			"',kana_chou_name='" + memberInfo.getKana_chou_name() +
 			" WHERE user_id='" + memberInfo.getUser_id() + "'";
 			//DBに接続
 			con = getConnection();

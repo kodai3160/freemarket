@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class PurchaseServlet extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//エラーメッセージ
 		String error = null;

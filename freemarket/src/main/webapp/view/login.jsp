@@ -21,31 +21,37 @@ if (message == null) {
 
 <head>
 <title>ログイン</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
 </head>
 <body class="login">
-<header>
+	<header>
 		<div id="title">
 			<h2>フリーマーケット</h2>
 		</div>
-<div style="color:red">
-<%=message %>
-</div>
-<div class="login-container">
-  <form action="<%=request.getContextPath()%>/login" method="post">
-    <div class="form-group">
-      <label for="username">メールアドレス</label>
-      <input type="text" id="email" name="email" value="<%=email%>" required>
-    </div>
-    <div class="form-group">
-      <label for="password">パスワード</label>
-      <input type="password" id="password" name="password" value="<%=pass%>" required>
-    </div>
-    <button type="submit">ログイン</button>
-  </form>
-  <a href="<%=request.getContextPath()%>/view/membership.jsp"><p>会員登録</p></a>
-</div>
+		<div style="color: red">
+			<%=message%>
+		</div>
+		<div class="login-container">
+			<form action="<%=request.getContextPath()%>/login" method="post">
+				<div class="form-group">
+					<label for="username">メールアドレス</label> <input type="text" id="email"
+						name="email" value="<%=email%>" required>
+				</div>
+				<div class="form-group">
+					<label for="password">パスワード</label> <input type="password"
+						id="password" name="password" value="<%=pass%>" required>
+				</div>
+				<button type="submit">ログイン</button>
+			</form>
+			<form method="post"
+				action="<%=request.getContextPath()%>/membership"
+				name="membership_form">
+				<a href="#" onclick="document.membership_form.submit()">会員登録</a>
+				<input type="hidden" name="check" value="init">
+			</form>
+		</div>
 
-<%@include file="/common/footer.jsp"%>
+		<%@include file="/common/footer.jsp"%>
 </body>
 </html>

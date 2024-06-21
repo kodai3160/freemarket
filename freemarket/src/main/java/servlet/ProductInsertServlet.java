@@ -38,12 +38,20 @@ public class ProductInsertServlet extends HttpServlet {
 		String error = "";
 		//コマンド変数の宣言
 		String cmd = "";
+		
+		String check = "";
 
 		try {
 
 			//画面からの入力情報を受け取るためのエンコードを設定
 			request.setCharacterEncoding("UTF-8");
-						
+			
+			check = request.getParameter("check");
+			
+			if(check.equals("init")) {
+				return;
+			}
+			
 			//商品名
 			String name = request.getParameter("name");
 			//価格
@@ -201,9 +209,11 @@ public class ProductInsertServlet extends HttpServlet {
 			cmd = "logout";
 
 		} finally {
-			if (error.equals("")) {
+			if (check.equals("init")) {
+				request.getRequestDispatcher("/view/productInsert.jsp").forward(request, response);
+			} else if (error.equals("")) {
 				//エラーがない場合は「OnSaleListServlet」へフォワード処理を行う
-				request.getRequestDispatcher("/view/menu.jsp").forward(request, response);
+				request.getRequestDispatcher("/productList").forward(request, response);
 			} else {
 				//エラーがある場合は「error.jsp」へフォワード処理を行う
 				request.setAttribute("error", error);

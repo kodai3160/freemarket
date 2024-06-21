@@ -182,7 +182,7 @@ input[type="password"] {
 	border-radius: 3px;
 }
 
-button[type="submit"] {
+button[type="submit"]:not(.list_form button) {
 	width: 40%;
 	padding: 10px;
 	background-color: #eb6100;

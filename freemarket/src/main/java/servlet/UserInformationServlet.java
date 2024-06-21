@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/userInformation")
 public class UserInformationServlet extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//エラーメッセージ用変数
 		String error = null;
@@ -31,7 +31,7 @@ public class UserInformationServlet extends HttpServlet {
 			//エンコーディング
 			request.setCharacterEncoding("UTF-8");
 			//セッションに登録された値から、会員情報を取得する
-			MemberInfo memberInfoObj = memberDao.selectByUser(Integer.toString(loginObj.getUserId()));
+			MemberInfo memberInfoObj = memberDao.selectByUser(loginObj.getUserId());
 			if(memberInfoObj.getMember_id()==0) {
 				error = "ユーザー情報見つかりませんでした。";
 				return;
