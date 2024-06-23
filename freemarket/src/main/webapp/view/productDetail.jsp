@@ -13,10 +13,10 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 
 <body class="login">
 	<%@include file="/common/header.jsp"%>
-	
+
 	<div class="detail">
 		<div id="detail_picture">
-			<img src="./img/image1.jpeg" width="400" height="400" alt="" />
+			<img src="<%=production.getPicture()%>" height="300" width="300">
 		</div>
 		<div id="detail_description">
 			<h1>
@@ -33,7 +33,11 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 				色：<%=production.getColor()%></h2>
 			<h2>
 				サイズ：<%=production.getSize()%></h2>
-			<button type="submit" onclick="location.href='<%=request.getContextPath()%>/purchase'">購入</button>
+				<% if (!authority.equals("：管理者")) { %>
+			<form method="post" action="<%=request.getContextPath()%>/purchase">
+				<button type="submit">購入</button>
+			</form>
+			<% } %>
 		</div>
 	</div>
 

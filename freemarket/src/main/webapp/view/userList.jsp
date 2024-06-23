@@ -29,9 +29,15 @@ ArrayList<MemberInfo> memberList = (ArrayList<MemberInfo>) request.getAttribute(
 		%>
 
 		<tr>
-			<td><a
-				href="<%=request.getContextPath()%>/userDetail?user_id=<%=memberInfo.getUser_id()%>&cmd=userDetail"><%=memberInfo.getUser_id()%></a></td>
+			<td><p><%=memberInfo.getUser_id()%></p></td>
 			<td><%=memberInfo.getSurname()%><%=memberInfo.getName()%></td>
+			<td style="width: 100px;">
+			<form method="post" action="<%=request.getContextPath()%>/userDetail">
+				<input type="hidden" name="user_id" value="<%=memberInfo.getUser_id()%>"> 
+				<input type="hidden" name="cmd" value="userDetail">
+				<button type="submit">詳細</button>
+			</form>
+			</td>
 		</tr>
 		<%
 		}

@@ -78,11 +78,11 @@ public class ProductInsertServlet extends HttpServlet {
 			Part filePart = request.getPart("image");
 			String uploadDir = "";
 			String filePath = "";
+			String fileName = "";
 
 			//写真取得処理
 			if (filePart.getSize() != 0) {
 				String contentDisposition = filePart.getHeader("content-disposition");
-				String fileName = "";
 				Pattern pattern = Pattern.compile("filename=\"(.*)\"");
 				Matcher matcher = pattern.matcher(contentDisposition);
 				//抽出したファイル名が存在していれば抽出、なければ空白
@@ -199,7 +199,7 @@ public class ProductInsertServlet extends HttpServlet {
 			//表示フラグ　DAO側で設定される
 			productionInfo.setDisplay_flag("");
 			//写真
-			productionInfo.setPicture(filePath);
+			productionInfo.setPicture("/freemarket/file/"+fileName);
 			
 			//DBに格納
 			productionDao.insert(productionInfo);

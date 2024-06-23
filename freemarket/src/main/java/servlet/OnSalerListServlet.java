@@ -29,7 +29,8 @@ public class OnSalerListServlet extends HttpServlet {
 			ProductionInfoDAO productionInfoDAO = new ProductionInfoDAO();
 			
 			//関連メソッドを呼び出し戻り値としてMemberInfoオブジェクトのリストを取得する
-			ArrayList<MemberInfo> memberList = objDao.selectByUserList(productionInfoDAO.selectMemberidList());
+			ArrayList<Integer> list = productionInfoDAO.selectMemberidList();
+			ArrayList<MemberInfo> memberList = objDao.selectByUserList(list);
 			
 			//リクエストスコープへ登録
 			request.setAttribute("memberList", memberList);

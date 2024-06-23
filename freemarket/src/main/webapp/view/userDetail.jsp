@@ -3,7 +3,7 @@
 
 <%
 //UserDetailServletでリクエストスコープに登録したユーザー情報を取得
- MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
+MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
 %>
 
 <html>
@@ -31,7 +31,6 @@
 		</div>
 	</header>
 
-	<form action="#">
 		<table class="detail">
 			<tbody>
 				<tr>
@@ -99,15 +98,12 @@
 			</tbody>
 		</table>
 
-		<div>
-			<button class="submit_button" type="submit">編集</button>
-			</td>
-			<button class="submit_button" type="submit">削除</button>
-			</td>
-		</div>
-
-	</form>
-
+	<div>
+		<form method="post" action="<%=request.getContextPath()%>/onSaleList">
+			<button type="submit">出品一覧表示</button>
+			<input type="hidden" name="member_id" value="<%= memberInfo.getMember_id() %>">
+		</form>
+	</div>
 	<footer class="footer">
 		<p class="copyright">© 2024 フリーマーケット. All Rights Reserved.</p>
 	</footer>

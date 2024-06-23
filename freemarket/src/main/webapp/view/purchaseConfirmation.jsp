@@ -20,7 +20,7 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 	<%@ include file = "/common/header.jsp" %>
 	<div class="buy_confirm">
 		<div id="buy_confirm_picture">
-			<img src="./img/image1.jpeg" width="400" height="400" alt="" />
+			<img src="<%=production.getPicture()%>" height="400" width="400">
 		</div>
 		<div id="buy_confirm_description">
 			<h1><%= production.getProduct() %></h1>

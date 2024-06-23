@@ -84,7 +84,7 @@ public class MemberInfoDAO {
 				memberInfo.setZipcode(rs.getInt("zipcode"));
 				memberInfo.setKana_building_name(rs.getString("kana_building_name"));
 				memberInfo.setChou_name(rs.getString("chou_name"));
-				memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
+				memberInfo.setKana_chou_name(rs.getString("kana_chou_name"));
 			}
 
 		} catch (Exception e) {
@@ -156,7 +156,7 @@ public class MemberInfoDAO {
 				memberInfo.setZipcode(rs.getInt("zipcode"));
 				memberInfo.setKana_building_name(rs.getString("kana_building_name"));
 				memberInfo.setChou_name(rs.getString("chou_name"));
-				memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
+				memberInfo.setKana_chou_name(rs.getString("kana_chou_name"));
 			}
 
 		} catch (Exception e) {
@@ -232,7 +232,7 @@ public class MemberInfoDAO {
 					memberInfo.setZipcode(rs.getInt("zipcode"));
 					memberInfo.setKana_building_name(rs.getString("kana_building_name"));
 					memberInfo.setChou_name(rs.getString("chou_name"));
-					memberInfo.setKana_chou_name(rs.getString("	kana_chou_name"));
+					memberInfo.setKana_chou_name(rs.getString("kana_chou_name"));
 					
 					memberInfoList.add(memberInfo);
 				}

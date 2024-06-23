@@ -20,11 +20,16 @@ public class OnSaleListServlet extends HttpServlet {
 		String cmd = "";
 
 		try {
+			//画面からの入力情報を受け取るためのエンコード設定
+			request.setCharacterEncoding("UTF-8");
+			
+			String member_id = request.getParameter("member_id");
+			
 			//ProductionInfoDAOをインスタンス化する
 			ProductionInfoDAO productsDaoObj = new ProductionInfoDAO();
 
 			//関連メソッドを呼び出し、戻り値としてProductionInfoオブジェクトのリストを取得する
-			ArrayList<ProductionInfo> productsList = productsDaoObj.selectAll();
+			ArrayList<ProductionInfo> productsList = productsDaoObj.selectByMemberid(Integer.parseInt(member_id));
 
 			//リクエストスコープに"products_list"という名前で格納する
 			request.setAttribute("products_list", productsList);
