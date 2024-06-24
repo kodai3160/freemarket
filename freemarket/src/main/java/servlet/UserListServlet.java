@@ -30,7 +30,7 @@ public class UserListServlet extends HttpServlet {
 			request.setAttribute("memberList", memberList);
 			
 		}catch(IllegalStateException e) {
-			error = "DB接続エラーの為、一覧表示は行えませんでした。";
+			error = "DB接続エラーの為、ユーザー一覧表示は行えませんでした。";
 			cmd = "menu";
 		}finally{
 			//エラーの有無でフォワード先を呼び分ける

@@ -79,7 +79,7 @@ public class PurchaseConfirmationServlet extends HttpServlet {
 			
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーが発生しました。";
+			error = "DB接続エラーの為、購入は行えませんでした。 ";
 		} finally {
 			//遷移先用変数
 			String forwardPath = "";

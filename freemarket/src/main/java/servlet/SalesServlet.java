@@ -29,7 +29,7 @@ public class SalesServlet extends HttpServlet {
 		request.setAttribute("product_List", productList);
 			
 		}catch(IllegalStateException e) {
-			error="DB接続エラーの為、一覧表示は行えませんでした。 ";
+			error="DB接続エラーの為、売上げ確認の確認は行えませんでした。 ";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}

@@ -34,7 +34,7 @@ public class ShippingChangeServlet extends HttpServlet {
 			productDao.updateShipping(productid,flag);
 			
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、一覧表示は行えませんでした。 ";
+			error = "DB接続エラーの為、ステータス変更は行えませんでした。 ";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		} 

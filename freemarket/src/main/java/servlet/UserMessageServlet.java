@@ -208,7 +208,7 @@ public class UserMessageServlet extends HttpServlet {
 			productionDao.insert(productionInfo);
 			//DBに接続できない場合
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、商品登録処理は行えませんでした。";
+			error = "DB接続エラーの為、ユーザーメッセージ処理は行えませんでした。";
 			cmd = "logout";
 
 		} finally {

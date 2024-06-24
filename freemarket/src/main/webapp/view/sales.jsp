@@ -5,7 +5,7 @@ int sales = 0;
 %>
 <html>
 <head>
-<title>サンプル</title>
+<title>売上げ確認</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
 </head>

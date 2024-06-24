@@ -48,7 +48,7 @@ public class SendMail {
 			//メール本文
 			StringBuilder text = new StringBuilder();
 			text.append(nickname + "様\n\n");
-			text.append(name + "のご購入がされました。。\n");
+			text.append(name + "のご購入がされました。\n");
 			text.append("ご連絡致します。\n\n");			
 
 			text.append("  " + price + "円\n\n");
@@ -119,7 +119,7 @@ public class SendMail {
 			//メール本文
 			StringBuilder text = new StringBuilder();
 			text.append(nickname + "様\n\n");
-			text.append(name + "をご購入しました。。\n");
+			text.append(name + "をご購入しました。\n");
 			text.append("ご連絡致します。\n\n");			
 
 			text.append("  " + price + "円\n\n");
