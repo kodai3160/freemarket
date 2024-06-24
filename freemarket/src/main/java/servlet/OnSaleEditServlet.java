@@ -27,14 +27,19 @@ public class OnSaleEditServlet extends HttpServlet {
 
 		String error = "";
 		String check = "";
-
+		String id = "";
+		
 		try {
 			// 入力データの文字コードの指定
 			request.setCharacterEncoding("UTF-8");
 
 			check = request.getParameter("check");
 			
+			id = request.getParameter("product_id");
+			
 			if(check.equals("init")) {
+				//リクエストスコープに登録
+				request.setAttribute("product_id", id);
 				return;
 			}
 			
@@ -103,9 +108,11 @@ public class OnSaleEditServlet extends HttpServlet {
 
 				return;
 			}
-
+			
+			ProductionInfoDAO productionInfoDAO = new ProductionInfoDAO();
 			//ProductionInfoオブジェクト生成、セッターメソッドで設定
-			ProductionInfo productionInfo = new ProductionInfo();
+			ProductionInfo productionInfo = productionInfoDAO.selectByProductid(Integer.parseInt(id));
+			
 			productionInfo.setProduct(product);
 			productionInfo.setSelling_price(selling_price);
 			productionInfo.setOrigin_region(origin_region);

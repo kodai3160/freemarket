@@ -1,5 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
+<%
+String product_id = (String) request.getAttribute("product_id");
+%>
+
+
 <html>
 <head>
 <title>商品情報編集</title>
@@ -46,6 +51,7 @@
 				</tr>
 			</table>
 			<input type="hidden" name="check" value="update">
+			<input type="hidden" name="product_id" value="<%= product_id %>">
 			<button type="submit">変更</button>
 		</form>
 	</div>

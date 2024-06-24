@@ -62,7 +62,9 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 			</h2>
 			<h2>商品情報変更</h2>
 			<form method="post" action="<%=request.getContextPath()%>/onSaleEdit">
-				<input type="hidden" name="check" value="init">
+				<input type="hidden" name="product_id"
+					value="<%=production.getProduct_id()%>"> <input
+					type="hidden" name="check" value="init">
 				<button type="submit">変更</button>
 			</form>
 			<%
