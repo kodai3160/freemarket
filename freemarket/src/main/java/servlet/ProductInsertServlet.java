@@ -135,6 +135,12 @@ public class ProductInsertServlet extends HttpServlet {
 				cmd = "list";
 				return;
 			}
+			Pattern pattern = Pattern.compile("^[0-9]+$");
+			if(price != null && !pattern.matcher(price).matches()) {
+				error = "価格が文字列の為、商品登録処理は行えませんでした。 ";
+				cmd = "list";
+				return;
+			}
 
 			//ProductionInfoDAOクラスのオブジェクトを生成
 			ProductionInfoDAO productionDao = new ProductionInfoDAO();

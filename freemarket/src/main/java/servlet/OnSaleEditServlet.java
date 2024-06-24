@@ -98,6 +98,12 @@ public class OnSaleEditServlet extends HttpServlet {
 
 				return;
 			}
+			Pattern pattern = Pattern.compile("^[0-9]+$");
+			if(selling_price != null && !pattern.matcher(selling_price).matches()) {
+				error = "価格が文字列の為、商品情報の編集は行えませんでした。 ";
+				return;
+			}
+			
 			if (origin_region.equals("")) {
 				error = "出品地域が未入力のため、商品情報の編集は行えませんでした。";
 
@@ -126,7 +132,7 @@ public class OnSaleEditServlet extends HttpServlet {
 			request.setAttribute("productionInfo", productionInfo);
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、商品一覧表示は行えませんでした。";
+			error = "DB接続エラーの為、商品編集表示は行えませんでした。";
 		} finally {
 			//エラーの有無でフォワード先を呼び分ける
 			if(check.equals("init")) {

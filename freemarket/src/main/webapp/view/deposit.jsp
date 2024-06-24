@@ -19,7 +19,7 @@
 					<td><h2>画像</h2></td>
 					<td><h2>商品名</h2></td>
 					<td><h2>価格</h2></td>
-					<td><h2>入金状態 1:入金済み 2:未入金</h2></td>
+					<td><h2>入金状態</h2></td>
 					<td><h2>入金状態変更</h2></td>
 					<td>&nbsp</td>
 				</tr>
@@ -39,8 +39,12 @@
 							商品名：<%=product.getProduct()%></p></td>
 					<td><p>
 							価格：<%=product.getSelling_price()%></p></td>
-					<td><p>
-							入金状態：<%=product.getDeposit_status()%></p></td>
+					<% if(product.getDeposit_status().equals("0")) { %>
+					<td><p> 未入金</p></td>
+					<% } %>
+					<% if(product.getDeposit_status().equals("1")) { %>
+					<td><p> 入金済</p></td>
+					<% } %>
 					<td style="text-align: left; width: 125px">
 					<form method="post" action="<%=request.getContextPath()%>/depositChange" name="yes">
 						<button type="submit">入金済み</button>

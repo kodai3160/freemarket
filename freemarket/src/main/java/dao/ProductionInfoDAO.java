@@ -719,11 +719,20 @@ public class ProductionInfoDAO {
 	        String transaction = productionInfo.getTransaction_flag();
 	        
 	        int transaction_flag = Integer.parseInt(transaction);			
+	        
+	        int buyer_id = productionInfo.getBuyer_id();
+	        String buyer = "";
+	        if(buyer_id == 0) {
+	        	buyer = "NULL";
+	        } else {
+	        	buyer = String.valueOf(buyer_id);
+	        }
+	        
 			//SQL文
 			String sql = "UPDATE productioninfo " + 
 			"SET product_id= " + productionInfo.getProduct_id() + 
 			",member_id= " + productionInfo.getMember_id() +
-			",buyer_id= " + productionInfo.getBuyer_id() +
+			",buyer_id= " + buyer +
 			",category= '" + productionInfo.getCategory() +
 			"',item_description= '" + productionInfo.getItem_description() +
 			"',item_condition= '" + productionInfo.getItem_condition() +

@@ -32,8 +32,12 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 				色：<%=production.getColor()%></h2>
 			<h2>
 				サイズ：<%=production.getSize()%></h2>
-			<h2>発送状況 0:未発送 1:発送済み</h2>
-			<h2><%=production.getShipping_status_flag()%></h2>
+			<% if(production.getShipping_status_flag().equals("0")){ %>
+			<h2>発送状況:未発送</h2>
+			<% } %>
+			<% if(production.getShipping_status_flag().equals("1")){ %>
+			<h2>発送状況:発送済</h2>
+			<% } %>
 			<%
 			if (!authority.equals("：管理者")) {
 			%>
