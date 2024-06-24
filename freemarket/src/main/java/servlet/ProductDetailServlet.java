@@ -2,7 +2,9 @@ package servlet;
 
 import java.io.IOException;
 
+import bean.MemberInfo;
 import bean.ProductionInfo;
+import dao.MemberInfoDAO;
 import dao.ProductionInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,6 +37,13 @@ public class ProductDetailServlet extends HttpServlet {
 		//セッションに格納する
 		HttpSession  session= request.getSession();
 		session.setAttribute("productInfo",productInfo);
+		
+		//出品者情報の取得
+		MemberInfoDAO memberInfoDAO = new MemberInfoDAO();
+		
+		MemberInfo memberInfo = memberInfoDAO.selectByMemberId(productInfo.getMember_id());
+		request.setAttribute("memberInfo", memberInfo);
+		
 		
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーが発生しました。";

@@ -10,7 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import bean.LoginInfo;
+import bean.MemberInfo;
 import bean.ProductionInfo;
+import dao.MemberInfoDAO;
 import dao.ProductionInfoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -18,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 /**
@@ -148,8 +152,14 @@ public class ProductInsertServlet extends HttpServlet {
 			
 			//自動で設定される
 			productionInfo.setProduct_id(0);
+			//セッションから取得
+			//セッションの値を受け取る
+			HttpSession session = request.getSession();
+			LoginInfo loginObj = (LoginInfo) session.getAttribute("loginInfo");
+			MemberInfoDAO memberInfoDAO = new MemberInfoDAO();
+			MemberInfo memberInfo = memberInfoDAO.selectByUser(loginObj.getUserId());
 			//ログインしている会員ID
-			productionInfo.setMember_id(1);
+			productionInfo.setMember_id(memberInfo.getMember_id());
 			//購入者ID　商品登録の為設定できない
 			productionInfo.setBuyer_id(0);
 			//カテゴリ

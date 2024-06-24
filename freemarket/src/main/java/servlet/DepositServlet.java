@@ -41,7 +41,7 @@ public class DepositServlet extends HttpServlet {
 			
 				
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、一覧表示は行えませんでした。 ";
+			error = "DB接続エラーの為、入金情報の表示は行えませんでした。 ";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}

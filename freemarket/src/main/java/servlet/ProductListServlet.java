@@ -27,7 +27,7 @@ public class ProductListServlet extends HttpServlet {
 			ProductionInfoDAO productsDaoObj = new ProductionInfoDAO();
 
 			//関連メソッドを呼び出し、戻り値としてBookオブジェクトのリストを取得する
-			ArrayList<ProductionInfo> productsList = productsDaoObj.selectAll();
+			ArrayList<ProductionInfo> productsList = productsDaoObj.selectByTransactionDown();
 
 			//リクエストスコープに"products_list"という名前で格納する
 			request.setAttribute("products_list", productsList);

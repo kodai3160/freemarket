@@ -349,6 +349,84 @@ public class ProductionInfoDAO {
 		}
 		return productionInfoList;
 	}
+	
+	/**
+	 * 入金フラグが1かどうかを元に全ての商品情報が取得できる。
+	 * 管理者の売上げの確認とかで使用する
+	 *  
+	 * @return 	入金されている商品情報のリスト
+	*/
+	public ArrayList<ProductionInfo> selectByTransactionDown() {
+		//リスト
+		ArrayList<ProductionInfo> productionInfoList = new ArrayList<ProductionInfo>();
+
+		//DB接続
+		Connection con = null;
+		Statement smt = null;
+
+		//SQL作成
+		String sql = "SELECT * FROM productioninfo WHERE transaction_flag= '0'";
+
+		try {
+			con = getConnection();
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			while (rs.next()) {
+				//オブジェクト生成
+				ProductionInfo productionInfo = new ProductionInfo();
+
+				//情報を格納
+				productionInfo.setProduct_id(rs.getInt("product_id"));
+				productionInfo.setMember_id(rs.getInt("member_id"));
+				productionInfo.setBuyer_id(rs.getInt("buyer_id"));
+				productionInfo.setCategory(rs.getString("category"));
+				productionInfo.setItem_description(rs.getString("item_description"));
+				productionInfo.setItem_condition(rs.getString("item_condition"));
+				productionInfo.setUses_number(rs.getString("uses_number"));
+				productionInfo.setColor(rs.getString("color"));
+				productionInfo.setPicture(rs.getString("picture"));
+				productionInfo.setProduct(rs.getString("product"));
+				productionInfo.setCost_price(rs.getString("cost_price"));
+				productionInfo.setSelling_price(rs.getString("selling_price"));
+				productionInfo.setSize(rs.getString("size"));
+				productionInfo.setShipping_addres(rs.getString("shipping_addres"));
+				productionInfo.setUpdate_time(rs.getString("update_time"));
+				productionInfo.setUntil_shipping(rs.getString("until_shipping"));
+				productionInfo.setOrigin_region(rs.getString("origin_region"));
+				productionInfo.setShipping_method(rs.getString("shipping_method"));
+				productionInfo.setRegistration_date(rs.getString("registration_date"));
+				productionInfo.setUpdate_date(rs.getString("update_date"));
+				productionInfo.setDetails_update_date(rs.getString("details_update_date"));
+				productionInfo.setShipping_status_flag(rs.getString("shipping_status_flag"));
+				productionInfo.setTransaction_flag(rs.getString("transaction_flag"));
+				productionInfo.setTransaction_completion_date(rs.getString("transaction_completion_date"));
+				productionInfo.setDeposit_status(rs.getString("deposit_status"));
+				productionInfo.setDeposit_update_date(rs.getString("deposit_update_date"));
+				productionInfo.setDisplay_flag(rs.getString("display_flag"));
+
+				productionInfoList.add(productionInfo);
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return productionInfoList;
+	}
 
 	/**
 	 * 引数で与えられたユーザーIDを元に入金フラグが1かどうかを元に全ての商品情報が取得できる。
@@ -588,7 +666,7 @@ public class ProductionInfoDAO {
 					productionInfo.getRegistration_date() + "','" +
 					productionInfo.getUpdate_date() + "','" +
 					productionInfo.getDetails_update_date() + "','" +
-					"" + "','" +
+					"0" + "','" +
 					"0" + "','" +
 					"" + "','" +
 					"0" + "','" +
@@ -638,7 +716,9 @@ public class ProductionInfoDAO {
 	            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // ①
 	        String formatNowDate = dtf1.format(LocalDateTime.now()); // ②
 			
-			
+	        String transaction = productionInfo.getTransaction_flag();
+	        
+	        int transaction_flag = Integer.parseInt(transaction);			
 			//SQL文
 			String sql = "UPDATE productioninfo " + 
 			"SET product_id= " + productionInfo.getProduct_id() + 
@@ -656,19 +736,19 @@ public class ProductionInfoDAO {
 			"',size= '" + productionInfo.getSize() +
 			"',shipping_addres= '" + productionInfo.getShipping_addres() +
 			"',update_time= '" + formatNowDate +
-			",until_shipping= " + productionInfo.getUntil_shipping() +
-			",origin_region= " + productionInfo.getOrigin_region() +
-			",shipping_method= " + productionInfo.getShipping_method() +
-			",registration_date= " + productionInfo.getRegistration_date() +
-			",update_date= " + formatNowDate +
-			",details_update_date= " + formatNowDate +
-			",shipping_status_flag= " + productionInfo.getShipping_status_flag() +
-			",transaction_flag= " + 0 +
-			",transaction_completion_date= " + formatNowDate +
-			",deposit_status= " + 0 +
-			",deposit_update_date= " + formatNowDate +
-			",display_flag= " + productionInfo.getDisplay_flag() +
-			"' WHERE product_id=" + productionInfo.getProduct_id();
+			"',until_shipping= '" + productionInfo.getUntil_shipping() +
+			"',origin_region= '" + productionInfo.getOrigin_region() +
+			"',shipping_method= '" + productionInfo.getShipping_method() +
+			"',registration_date= '" + productionInfo.getRegistration_date() +
+			"',update_date= '" + formatNowDate +
+			"',details_update_date= '" + formatNowDate +
+			"',shipping_status_flag= '" + productionInfo.getShipping_status_flag() +
+			"',transaction_flag= " + transaction_flag +
+			",transaction_completion_date= '" + formatNowDate +
+			"',deposit_status= " + 0 +
+			",deposit_update_date= '" + formatNowDate +
+			"',display_flag= " + productionInfo.getDisplay_flag() +
+			" WHERE product_id=" + productionInfo.getProduct_id();
 			
 			
 			//DBに接続
@@ -676,7 +756,9 @@ public class ProductionInfoDAO {
 			//SQL送信準備
 			smt = con.createStatement();
 			//SQL実行
-			smt.executeUpdate(sql);
+			int count = smt.executeUpdate(sql);
+			
+			System.out.println(count);
 
 		} catch (Exception e) {
 			throw new IllegalStateException(e);

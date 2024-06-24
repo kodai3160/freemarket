@@ -511,3 +511,15 @@ li:nth-child(2) {
 	/*マウスポインタを当てた時に、カーソルが指の形になる*/
 
 }
+
+.user {
+	text-align: center;
+}
+
+.user table {
+	margin: auto;
+}
+
+.user_id {
+	text-align: center;
+}

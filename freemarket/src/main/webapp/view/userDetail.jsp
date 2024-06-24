@@ -12,9 +12,10 @@ MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
 	href="<%=request.getContextPath()%>/css/style.css">
 
 </head>
-<body class="menu">
+<body>
 	<%@ include file="/common/header.jsp"%>
-		<table class="detail">
+	<div class="user">
+		<table>
 			<tbody>
 				<tr>
 					<th>会員ID</th>
@@ -80,11 +81,12 @@ MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
 					<td><%=memberInfo.getBuilding_name()%></td>
 			</tbody>
 		</table>
-
+	</div>
 	<div>
 		<form method="post" action="<%=request.getContextPath()%>/onSaleList">
 			<button type="submit">出品一覧表示</button>
-			<input type="hidden" name="member_id" value="<%= memberInfo.getMember_id() %>">
+			<input type="hidden" name="member_id"
+				value="<%=memberInfo.getMember_id()%>">
 		</form>
 	</div>
 	<footer class="footer">

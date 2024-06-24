@@ -51,7 +51,6 @@ if (message == null) {
 				<input type="hidden" name="check" value="init">
 			</form>
 		</div>
-
 		<%@include file="/common/footer.jsp"%>
 </body>
 </html>

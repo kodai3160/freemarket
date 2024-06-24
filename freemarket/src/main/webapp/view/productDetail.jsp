@@ -1,8 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="bean.ProductionInfo"%>
+<%@page import="bean.ProductionInfo, bean.MemberInfo"%>
 
 <%
 ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo");
+
+MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
 %>
 
 <head>
@@ -33,6 +35,8 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 				色：<%=production.getColor()%></h2>
 			<h2>
 				サイズ：<%=production.getSize()%></h2>
+				
+			<h3>出品者：<%= memberInfo.getNickname() %></h3>
 				<% if (!authority.equals("：管理者")) { %>
 			<form method="post" action="<%=request.getContextPath()%>/purchase">
 				<button type="submit">購入</button>
