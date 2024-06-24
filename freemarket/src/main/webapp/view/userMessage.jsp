@@ -13,21 +13,7 @@
 </head>
 
 <body class="login">
-	<header>
-		<div id="title">
-			<h2>フリーマーケット</h2>
-		</div>
-		<div class="menu">
-			<nav class="stroke">
-				<ul>
-					<li><a href="./product_list.html">商品一覧</a></li>
-					<li><a href="./user_info.html">ユーザー情報</a></li>
-					<li><a href="./product_insert.html">商品登録</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-
+	<%@ include file="/common/header.jsp"%>
 	<div class="user_message">
 		<h1>メッセージ</h1>
 		<div id="your_container">

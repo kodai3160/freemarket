@@ -61,8 +61,7 @@ public class PurchaseConfirmationServlet extends HttpServlet {
 			//ログイン情報の機能からちゃんと出来ていたら完成
 			MemberInfo memberInfo = memberInfoDAO.selectByUser(loginInfo.getUserId());
 			productionInfo.setBuyer_id(memberInfo.getMember_id());
-			
-			System.out.println(memberInfo.getMember_id());			
+						
 			//DBを更新
 			productionDAO.update(productionInfo);
 			
@@ -73,8 +72,10 @@ public class PurchaseConfirmationServlet extends HttpServlet {
 			MemberInfo member = memberInfoDAO.selectByMemberId(productionInfo.getMember_id());
 			//販売しているユーザーのログイン情報
 			LoginInfo memberLoginInfo = loginInfoDAO.selectByUserId(member.getUser_id());
-			//メールの送信
-			SendMail.sendMail(memberLoginInfo.getEmail(), productionInfo.getProduct(), productionInfo.getSelling_price(), member.getNickname());
+			//出品者にメールの送信
+			SendMail.sendBuyerMail(memberLoginInfo.getEmail(), productionInfo.getProduct(), productionInfo.getSelling_price(), member.getNickname());
+			//購入者（ログインしているユーザー）にメールの送信
+			SendMail.sendMemberMail(loginInfo.getEmail(), productionInfo.getProduct(), productionInfo.getSelling_price(), memberInfo.getNickname());
 			
 
 		} catch (IllegalStateException e) {

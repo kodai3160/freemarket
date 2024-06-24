@@ -34,6 +34,9 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 				サイズ：<%=production.getSize()%></h2>
 			<h2>発送状況 0:未発送 1:発送済み</h2>
 			<h2><%=production.getShipping_status_flag()%></h2>
+			<%
+			if (!authority.equals("：管理者")) {
+			%>
 			<h2>
 				発送状況変更
 				<td style="text-align: left; width: 125px">
@@ -57,10 +60,14 @@ ProductionInfo production = (ProductionInfo) request.getAttribute("productid");
 
 				</td>
 			</h2>
+			<h2>商品情報変更</h2>
 			<form method="post" action="<%=request.getContextPath()%>/onSaleEdit">
 				<input type="hidden" name="check" value="init">
 				<button type="submit">変更</button>
 			</form>
+			<%
+			}
+			%>
 		</div>
 	</div>
 
