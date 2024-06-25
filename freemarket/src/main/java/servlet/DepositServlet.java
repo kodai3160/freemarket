@@ -35,7 +35,7 @@ public class DepositServlet extends HttpServlet {
 			
 			ProductionInfoDAO productDao = new ProductionInfoDAO(); 
 			
-			ArrayList<ProductionInfo> productList = productDao.selectByMemberid(memberInfo.getMember_id());
+			ArrayList<ProductionInfo> productList = productDao.selectByBuyerid(memberInfo.getMember_id());
 			
 			request.setAttribute("product_list", productList);
 			

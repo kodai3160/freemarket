@@ -287,7 +287,7 @@ public class ProductionInfoDAO {
 		Statement smt = null;
 
 		//SQL作成
-		String sql = "SELECT * FROM productioninfo WHERE transaction_flag= '1'";
+		String sql = "SELECT * FROM productioninfo WHERE deposit_status= '1'";
 
 		try {
 			con = getConnection();

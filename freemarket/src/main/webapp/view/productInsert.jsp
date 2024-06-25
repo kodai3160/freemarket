@@ -71,7 +71,7 @@
 			</tr>
 			<tr>
 				<td>
-					<p>発送地域</p>
+					<p>出品地域</p>
 				</td>
 				<td><input type="text" name="region"></td>
 			</tr>
