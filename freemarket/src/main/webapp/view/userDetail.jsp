@@ -89,9 +89,7 @@ MemberInfo memberInfo = (MemberInfo) request.getAttribute("memberInfo");
 				value="<%=memberInfo.getMember_id()%>">
 		</form>
 	</div>
-	<footer class="footer">
-		<p class="copyright">© 2024 フリーマーケット. All Rights Reserved.</p>
-	</footer>
+	<%@ include file="/common/footer.jsp"%>
 </body>
 </html>
 

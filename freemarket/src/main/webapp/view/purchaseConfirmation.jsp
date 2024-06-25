@@ -29,9 +29,7 @@ ProductionInfo production = (ProductionInfo) session.getAttribute("productInfo")
 		</div>
 	</div>
 
-	<footer class="footer">
-		<p class="copyright">© 2024 フリーマーケット. All Rights Reserved.</p>
-	</footer>
+	<%@ include file="/common/footer.jsp"%>
 </body>
 
 </html>

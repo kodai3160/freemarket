@@ -14,7 +14,7 @@
 <body class="login">
 	<header>
 		<div id="title">
-			<h2>フリーマーケット</h2>
+			<h2>FURI-CAN</h2>
 		</div>
 	</header>
 
@@ -119,9 +119,7 @@
 		</form>
 	</div>
 
-	<footer class="footer">
-		<p class="copyright">© 2024 フリーマーケット. All Rights Reserved.</p>
-	</footer>
+	<%@ include file="/common/footer.jsp"%>
 </body>
 
 </html>

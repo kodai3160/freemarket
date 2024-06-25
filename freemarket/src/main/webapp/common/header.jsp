@@ -20,7 +20,7 @@ if (loginInfo != null) {
 <header>
 	<div id="title">
 		<h2>
-			フリーマーケット<%=authority%></h2>
+			FURI-CAN<%=authority%></h2>
 	</div>
 	<div class="menu">
 		<nav class="stroke">

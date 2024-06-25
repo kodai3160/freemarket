@@ -15,12 +15,6 @@ ArrayList<ProductionInfo> productsList = (ArrayList<ProductionInfo>) request.get
 <body>
 	<%@ include file="/common/header.jsp"%>
 	<div>
-		<form method="get" action="#" class="search_container">
-			<input type="text" size="25" placeholder="キーワード検索"> <input
-				type="submit" value="検索">
-		</form>
-	</div>
-	<div>
 		<%
 		int count = 0;
 		if ((productsList != null)) {

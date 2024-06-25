@@ -27,7 +27,7 @@ if (message == null) {
 <body class="login">
 	<header>
 		<div id="title">
-			<h2>フリーマーケット</h2>
+			<h2>FURI-CAN</h2>
 		</div>
 		<div style="color: red">
 			<%=message%>
